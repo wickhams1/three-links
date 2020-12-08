@@ -9,7 +9,7 @@ import routes from '../routes/routes.js';
 
 const plugins = [
     {
-        plugin: routes
+        plugin: routes()
     },
     {
         plugin: pino,

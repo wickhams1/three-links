@@ -1,14 +1,12 @@
-import { getClassicLinks, createClassicLink } from './links/classic.js';
+import * as classicLinks from './{userId}/links/classic.js';
 
-const routes = {
+const routes = () => ({
     name: 'registerRoutes',
     register: async (server, options) => {
 
-        // Create a route for example
-
-        server.route(getClassicLinks);
-        server.route(createClassicLink);
+        server.route(classicLinks.get());
+        server.route(classicLinks.post());
     }
-};
+});
 
 export default routes;
