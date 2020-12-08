@@ -1,5 +1,7 @@
 import Hapi from '@hapi/hapi';
 
+import plugins from './config/plugins.js';
+
 const init = async () => {
 
     // TODO: Externalise to env variables
@@ -8,8 +10,11 @@ const init = async () => {
         host: 'localhost'
     });
 
+    await server.register(
+        plugins
+    );
+
     await server.start();
-    console.log('Server running on %s', server.info.uri);
 };
 
 // Exit for unhandled promise rejections
