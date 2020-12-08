@@ -1,4 +1,4 @@
-import { getClassicLinks } from './links/classic.js';
+import { getClassicLinks, createClassicLink } from './links/classic.js';
 
 const routes = {
     name: 'registerRoutes',
@@ -7,6 +7,7 @@ const routes = {
         // Create a route for example
 
         server.route(getClassicLinks);
+        server.route(createClassicLink);
     }
 };
 
