@@ -6,6 +6,7 @@ import ResponseLinksList from '../../../routes-models/ResponseLinksList.js';
 import PaginationQuery from '../../../routes-models/RequestPaginationQuery.js';
 
 import * as musicLinks from '../../../services/musicLinks.js';
+import linkTypes from '../../../config/linkTypes.json';
 
 const path = '/{userId}/links/music';
 
@@ -21,7 +22,7 @@ const get = () => ({
         },
         response: {
             status: {
-                200: ResponseLinksList(ResponseMusicLink())
+                200: ResponseLinksList(ResponseMusicLink(), linkTypes.music).label('ResponseMusicLinksList')
             }
         }
     },

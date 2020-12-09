@@ -6,9 +6,9 @@ import ShowsLinkProperties from './ShowsLinkProperties.js';
 
 const responseLinkTypes = (allowType) => {
     const types = {
-        classic: Joi.object(ClassicLinkProperties()),
-        music: Joi.object(MusicLinkProperties()),
-        shows: Joi.object(ShowsLinkProperties()),
+        classic: Joi.object(ClassicLinkProperties()).label('Classic'),
+        music: Joi.object(MusicLinkProperties()).label('Music'),
+        shows: Joi.object(ShowsLinkProperties()).label('Shows'),
     };
 
     if (allowType) {

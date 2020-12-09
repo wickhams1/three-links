@@ -7,7 +7,7 @@ import linkTypes from '../config/linkTypes.json';
 const type = linkTypes.classic;
 
 const ResponseClassicLink = () => ResponseLink(type).keys({
-    type: Joi.string().required().default(type)
+    type: Joi.string().required().valid(type)
 }).label('ResponseClassicLink');
 
 export default ResponseClassicLink;

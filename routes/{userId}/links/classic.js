@@ -6,6 +6,7 @@ import ResponseLinksList from '../../../routes-models/ResponseLinksList.js';
 import PaginationQuery from '../../../routes-models/RequestPaginationQuery.js';
 
 import * as classicLinks from '../../../services/classicLinks.js';
+import linkTypes from '../../../config/linkTypes.json';
 
 const path = '/{userId}/links/classic';
 
@@ -21,7 +22,7 @@ const get = () => ({
         },
         response: {
             status: {
-                200: ResponseLinksList(ResponseClassicLink())
+                200: ResponseLinksList(ResponseClassicLink(), linkTypes.classic).label('ResponseClassicLinksList')
             }
         }
     },

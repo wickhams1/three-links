@@ -6,6 +6,7 @@ import ResponseLinksList from '../../../routes-models/ResponseLinksList.js';
 import PaginationQuery from '../../../routes-models/RequestPaginationQuery.js';
 
 import * as showsLinks from '../../../services/showsLinks.js';
+import linkTypes from '../../../config/linkTypes.json';
 
 const path = '/{userId}/links/shows';
 
@@ -21,7 +22,7 @@ const get = () => ({
         },
         response: {
             status: {
-                200: ResponseLinksList(ResponseShowsLink())
+                200: ResponseLinksList(ResponseShowsLink(), linkTypes.shows).label('ResponseShowsLinksList')
             }
         }
     },
