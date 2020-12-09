@@ -2,9 +2,10 @@ import MusicLink from '../models/MusicLink.js';
 
 import paginationDefaults from '../config/paginationDefaults.json';
 
-// Data just stored in array for now
-// TODO: Change to persistent nosql db
-const musicLinks = [];
+// Currently used to store data (runtime only)
+import links from '../links.js';
+
+import sortLinks from '../utils/sortLinks.js';
 
 // TODO: Music platforms can be separated into a separate service
 
@@ -15,7 +16,7 @@ const create = (musicLinkData) => {
     // This would be done more easily by using a proper persistence layer, and the utilities that would come from the ORM
     const musicLink = new MusicLink(musicLinkData);
 
-    musicLinks.push(musicLink);
+    links.push(musicLink);
 
     return musicLink;
 };
@@ -24,20 +25,12 @@ const create = (musicLinkData) => {
 const getListForUser = (userId, { page = paginationDefaults.page, pageSize = paginationDefaults["page-size"] }) => {
 
     // Find all links for the user
-    const linksForUser = musicLinks.filter(link => link.userId == userId);
+    const linksForUser = links.filter(link => link.userId == userId && link.type === "music");
 
     return {
         data: {
             links: linksForUser
-                .sort((linkA, linkB) => {
-                    // Sort on date created
-                    // Sorting could be configured based on request parameters (e.g. different fields, asc/desc)
-                    if (linkA.dateCreated < linkB.dateCreated) {
-                        return -1;
-                    } else if (linkA.dateCreated > linkB.dateCreated) {
-                        return 1;
-                    }
-                })
+                .sort(sortLinks)
                 .slice((page - 1) * pageSize, page * pageSize)
         },
         meta: {
