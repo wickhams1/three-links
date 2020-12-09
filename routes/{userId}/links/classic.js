@@ -3,11 +3,11 @@ import RequestUserId from '../../../routes-models/RequestUserId.js';
 import RequestLink from '../../../routes-models/RequestLink.js';
 import ResponseLink from '../../../routes-models/ResponseLink.js';
 import ResponseLinksList from '../../../routes-models/ResponseLinksList.js';
+import PaginationQuery from '../../../routes-models/RequestPaginationQuery.js';
+
+import * as classicLinks from '../../../services/classicLinks.js';
 
 const path = '/{userId}/links/classic';
-
-const links = [];
-
 
 const get = () => ({
     method: 'GET',
@@ -16,7 +16,8 @@ const get = () => ({
         description: 'Retrieve the classic links for the user',
         tags: ['api'],
         validate: {
-            params: RequestUserId
+            params: RequestUserId,
+            query: PaginationQuery
         },
         response: {
             status: {
@@ -26,13 +27,13 @@ const get = () => ({
     },
     handler: (request, h) => {
 
-        return {
-            data: {
-                links
-            }
-        };
+        return classicLinks.getListForUser(request.params.userId, {
+            page: request.query.page,
+            pageSize: request.query['page-size']
+        });
     }
 });
+
 
 const post = () => ({
     method: 'POST',
@@ -51,15 +52,15 @@ const post = () => ({
         }
     },
     handler: (request, h) => {
-        const newLink = {
+
+        const createdClassicLink = classicLinks.create({
             ...request.payload,
-            dateCreated: Date.now()
-        };
+            userId: request.params.userId
+        });
 
-        links.push(newLink);
-
+        // Return 201 with the classic link
         return h
-            .response(newLink)
+            .response(createdClassicLink)
             .code(201);
     },
 });
