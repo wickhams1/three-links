@@ -1,12 +1,11 @@
+import createId from "../utils/createId.js";
+
 const Link = class {
-    title;
-    url;
+    linkId = createId(30);
     userId;
     dateCreated = (new Date()).toISOString();
 
-    constructor({ title, url, userId }) {
-        this.title = title;
-        this.url = url;
+    constructor({ userId }) {
         this.userId = userId;
     }
 };

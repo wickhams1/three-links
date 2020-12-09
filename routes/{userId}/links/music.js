@@ -1,19 +1,19 @@
 
 import RequestUserId from '../../../routes-models/RequestUserId.js';
-import RequestClassicLink from '../../../routes-models/RequestClassicLink.js';
-import ClassicLink from '../../../routes-models/ResponseClassicLink.js';
+import RequestMusicLink from '../../../routes-models/RequestMusicLink.js';
+import ResponseMusicLink from '../../../routes-models/ResponseMusicLink.js';
 import ResponseLinksList from '../../../routes-models/ResponseLinksList.js';
 import PaginationQuery from '../../../routes-models/RequestPaginationQuery.js';
 
-import * as classicLinks from '../../../services/classicLinks.js';
+import * as musicLinks from '../../../services/musicLinks.js';
 
-const path = '/{userId}/links/classic';
+const path = '/{userId}/links/music';
 
 const get = () => ({
     method: 'GET',
     path,
     options: {
-        description: 'Retrieve the classic links for the user',
+        description: 'Retrieve the music links for the user',
         tags: ['api'],
         validate: {
             params: RequestUserId(),
@@ -21,13 +21,13 @@ const get = () => ({
         },
         response: {
             status: {
-                200: ResponseLinksList(ClassicLink())
+                200: ResponseLinksList(ResponseMusicLink())
             }
         }
     },
     handler: (request, h) => {
 
-        return classicLinks.getListForUser(request.params.userId, {
+        return musicLinks.getListForUser(request.params.userId, {
             page: request.query.page,
             pageSize: request.query['page-size']
         });
@@ -39,28 +39,28 @@ const post = () => ({
     method: 'POST',
     path,
     options: {
-        description: 'Create a classic link for the user',
+        description: 'Create a music link for the user',
         tags: ['api'],
         validate: {
             params: RequestUserId(),
-            payload: RequestClassicLink()
+            payload: RequestMusicLink()
         },
         response: {
             status: {
-                201: ClassicLink()
+                201: ResponseMusicLink()
             }
         }
     },
     handler: (request, h) => {
 
-        const createdClassicLink = classicLinks.create({
+        const createdMusicLink = musicLinks.create({
             ...request.payload,
             userId: request.params.userId
         });
 
         // Return 201 with the classic link
         return h
-            .response(createdClassicLink)
+            .response(createdMusicLink)
             .code(201);
     },
 });

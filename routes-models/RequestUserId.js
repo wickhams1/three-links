@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-const RequestUserId = Joi.object({
+const RequestUserId = () => Joi.object({
     userId: Joi.string().required(),
 }).label('RequestUserId');
 
