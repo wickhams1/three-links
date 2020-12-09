@@ -6,6 +6,8 @@ import paginationDefaults from '../config/paginationDefaults.json';
 // TODO: Change to persistent nosql db
 const musicLinks = [];
 
+// TODO: Music platforms can be separated into a separate service
+
 // Create and store a classic link
 const create = (musicLinkData) => {
 
