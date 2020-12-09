@@ -6,7 +6,7 @@ import showStatuses from '../config/showStatuses.json';
 
 // Common to request and response
 const showsLinkProperties = () => ({
-    shows: Joi.array().items(Joi.object({
+    registeredShows: Joi.array().items(Joi.object({
         url: UrlProperty(),
         showDate: Joi.date(),
         venue: Joi.string(),

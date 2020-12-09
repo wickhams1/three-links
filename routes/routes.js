@@ -3,6 +3,7 @@ import * as musicLinks from './{userId}/links/music.js';
 import * as showsLinks from './{userId}/links/shows.js';
 import * as links from './{userId}/links.js';
 
+// TODO: take the userId from the path. Have it be embedded or linked from within an authorisation JWT instead.
 
 const routes = () => ({
     name: 'registerRoutes',

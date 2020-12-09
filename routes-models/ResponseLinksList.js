@@ -1,6 +1,5 @@
 import Joi from 'joi';
 
-import ResponseLink from './ResponseLink.js';
 import ResponseMetaPaginated from './ResponseMetaPaginated.js';
 
 const ResponseLinksList = (LinkModel) => (Joi.object({

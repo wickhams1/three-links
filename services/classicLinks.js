@@ -1,6 +1,7 @@
 import ClassicLink from '../models/ClassicLink.js';
 
 import paginationDefaults from '../config/paginationDefaults.json';
+import linkTypes from '../config/linkTypes.json';
 
 // Currently used to store data (runtime only)
 import links from '../links.js';
@@ -24,7 +25,7 @@ const create = (classicLinkData) => {
 const getListForUser = (userId, { page = paginationDefaults.page, pageSize = paginationDefaults["page-size"] }) => {
 
     // Find all classic links for the user
-    const linksForUser = links.filter(link => link.userId == userId && link.type === "classic");
+    const linksForUser = links.filter(link => link.userId == userId && link.type === linkTypes.classic);
 
     return {
         data: {

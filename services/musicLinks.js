@@ -1,6 +1,7 @@
 import MusicLink from '../models/MusicLink.js';
 
 import paginationDefaults from '../config/paginationDefaults.json';
+import linkTypes from '../config/linkTypes.json';
 
 // Currently used to store data (runtime only)
 import links from '../links.js';
@@ -25,7 +26,7 @@ const create = (musicLinkData) => {
 const getListForUser = (userId, { page = paginationDefaults.page, pageSize = paginationDefaults["page-size"] }) => {
 
     // Find all links for the user
-    const linksForUser = links.filter(link => link.userId == userId && link.type === "music");
+    const linksForUser = links.filter(link => link.userId == userId && link.type === linkTypes.music);
 
     return {
         data: {

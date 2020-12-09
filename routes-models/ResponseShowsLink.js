@@ -3,9 +3,12 @@ import Joi from 'joi';
 import ShowsLinkProperties from './ShowsLinkProperties.js';
 import ResponseLink from './ResponseLink.js';
 
-const ResponseShowsLink = () => ResponseLink().keys({
-    ...ShowsLinkProperties(),
-    type: Joi.string().required().default('shows')
+import linkTypes from '../config/linkTypes.json';
+
+const type = linkTypes.shows;
+
+const ResponseShowsLink = () => ResponseLink(type).keys({
+    type: Joi.string().required().default(type)
 }).label('ResponseShowsLink');
 
 export default ResponseShowsLink;

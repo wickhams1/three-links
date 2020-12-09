@@ -1,32 +1,33 @@
 import Link from './Link.js';
-import ShowLink from './ShowLink.js';
+import RegisteredShow from './RegisteredShow.js';
+import linkTypes from '../config/linkTypes.json';
 
 const ShowsLink = class extends Link {
-    type = 'shows';
+    type = linkTypes.shows;
 
-    shows = [];
-
-    constructor({ userId, shows = [] }) {
-        super({ userId });
-
-        shows.forEach(show => this.addShow(show));
+    shows = {
+        registeredShows: []
     };
 
-    // These can be saved as an additional entity, with a link to this parent ShowsLink (by the ShowsLink linkId)
-    addShow({ showDate, venue, status, url }) {
-        const userId = this.userId;
+    constructor({ userId, registeredShows = [] }) {
+        super({ userId });
 
-        const show = new ShowLink({
-            userId,
+        registeredShows.forEach(registeredShows => this.addShow(registeredShows));
+    };
+
+    // RegisteredShow can be saved as an additional entity, with a link to this parent ShowsLink (by the ShowsLink linkId)
+    addShow({ showDate, venue, status, url }) {
+
+        const registeredShow = new RegisteredShow({
             showDate,
             venue,
             status,
             url
         });
 
-        this.shows.push(show);
+        this.shows.registeredShows.push(registeredShow);
 
-        return show;
+        return registeredShow;
     }
 };
 

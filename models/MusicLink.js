@@ -1,32 +1,29 @@
 import Link from './Link.js';
-import MusicPlatformLink from './MusicPlatformLink.js';
+import MusicPlatform from './MusicPlatform.js';
+import linkTypes from '../config/linkTypes.json';
 
 const MusicLink = class extends Link {
-    type = 'music';
-
-    platforms = [];
-    songName;
-    artistName;
+    type = linkTypes.music;
+    music = {};
 
     constructor({ userId, songName, artistName, platforms = [] }) {
         super({ userId });
-        this.songName = songName;
-        this.artistName = artistName;
+        this.music.songName = songName;
+        this.music.artistName = artistName;
+        this.music.platforms = [];
 
         platforms.forEach(platform => this.addPlatform(platform));
     };
 
-    // These can be saved as an additional entity, with a link to this parent MusicLink (by the MusicLink linkId)
+    // MusicPlatformLinks could be saved as an additional entity, with a link to this parent MusicLink (by the MusicLink linkId)
     addPlatform({ platformName, url }) {
-        const userId = this.userId;
 
-        const platform = new MusicPlatformLink({
-            userId,
+        const platform = new MusicPlatform({
             url,
             platformName
         });
 
-        this.platforms.push(platform);
+        this.music.platforms.push(platform);
 
         return platform;
     }

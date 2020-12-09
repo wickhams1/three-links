@@ -1,11 +1,13 @@
 import Joi from 'joi';
 
-import MusicLinkProperties from './MusicLinkProperties.js';
+import linkTypes from '../config/linkTypes.json';
+
 import ResponseLink from './ResponseLink.js';
 
-const ResponseMusicLink = () => ResponseLink().keys({
-    ...MusicLinkProperties(),
-    type: Joi.string().required().default('music')
+const type = linkTypes.music;
+
+const ResponseMusicLink = () => ResponseLink(type).keys({
+    type: Joi.string().required().default(type),
 }).label('ResponseMusicLink');
 
 export default ResponseMusicLink;

@@ -1,12 +1,11 @@
 
 import RequestUserId from '../../../routes-models/RequestUserId.js';
 import RequestClassicLink from '../../../routes-models/RequestClassicLink.js';
-import ClassicLink from '../../../routes-models/ResponseClassicLink.js';
+import ResponseClassicLink from '../../../routes-models/ResponseClassicLink.js';
 import ResponseLinksList from '../../../routes-models/ResponseLinksList.js';
 import PaginationQuery from '../../../routes-models/RequestPaginationQuery.js';
 
 import * as classicLinks from '../../../services/classicLinks.js';
-import Joi from 'joi';
 
 const path = '/{userId}/links/classic';
 
@@ -22,7 +21,7 @@ const get = () => ({
         },
         response: {
             status: {
-                200: ResponseLinksList(ClassicLink())
+                200: ResponseLinksList(ResponseClassicLink())
             }
         }
     },
@@ -48,7 +47,7 @@ const post = () => ({
         },
         response: {
             status: {
-                201: ClassicLink()
+                201: ResponseClassicLink()
             }
         }
     },

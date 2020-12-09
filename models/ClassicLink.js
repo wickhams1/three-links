@@ -1,13 +1,15 @@
-import UrlLink from './UrlLink.js';
+import Link from './Link.js';
+import linkTypes from '../config/linkTypes.json';
 
-const ClassicLink = class extends UrlLink {
-    type = 'classic';
-    title;
+const ClassicLink = class extends Link {
+    type = linkTypes.classic;
+    classic = {};
 
     constructor({ userId, url, title }) {
         super({ userId, url });
 
-        this.title = title;
+        this.classic.title = title;
+        this.classic.url = url;
     }
 };
 
