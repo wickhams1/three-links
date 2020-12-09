@@ -4,8 +4,8 @@ import ResponseMetaPaginated from './ResponseMetaPaginated.js';
 
 const ResponseLinksList = (LinkModel, type) => (Joi.object({
     data: Joi.object({
-        links: Joi.array().items(LinkModel).label('ResponseDataLinks' + (type ? '_' + type : ''))
-    }).label('ResponseData' + (type ? '_' + type : '')),
+        links: Joi.array().items(LinkModel).label('ResponseLinksListDataLinks' + (type ? '_' + type : ''))
+    }).label('ResponseLinksListData' + (type ? '_' + type : '')),
     meta: ResponseMetaPaginated()
 }).label('ResponseLinksList')
 );
