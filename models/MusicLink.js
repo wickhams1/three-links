@@ -16,13 +16,12 @@ const MusicLink = class extends Link {
         platforms.forEach(platform => this.addPlatform(platform));
     };
 
+    // These can be saved as an additional entity, with a link to this parent MusicLink (by the MusicLink linkId)
     addPlatform({ platformName, url }) {
         const userId = this.userId;
-        const musicLinkId = this.linkId;
 
         const platform = new MusicPlatformLink({
             userId,
-            musicLinkId,
             url,
             platformName
         });

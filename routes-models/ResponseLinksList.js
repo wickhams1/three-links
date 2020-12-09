@@ -7,7 +7,7 @@ const ResponseLinksList = (LinkModel) => (Joi.object({
     data: Joi.object({
         links: Joi.array().items(LinkModel)
     }),
-    meta: ResponseMetaPaginated
+    meta: ResponseMetaPaginated()
 }).label('ResponseLinksList'));
 
 export default ResponseLinksList;

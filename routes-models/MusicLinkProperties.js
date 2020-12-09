@@ -11,7 +11,7 @@ const musicLinkProperties = () => ({
     platforms: Joi.array().items(Joi.object({
         url: UrlProperty(),
         platformName: Joi.string().valid(...musicPlatformNames)
-    }))
+    }).label('MusicPlatformLink'))
 });
 
 export default musicLinkProperties;

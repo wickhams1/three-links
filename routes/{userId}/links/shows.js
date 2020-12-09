@@ -1,20 +1,19 @@
 
 import RequestUserId from '../../../routes-models/RequestUserId.js';
-import RequestClassicLink from '../../../routes-models/RequestClassicLink.js';
-import ClassicLink from '../../../routes-models/ResponseClassicLink.js';
+import RequestShowsLink from '../../../routes-models/RequestShowsLink.js';
+import ResponseShowsLink from '../../../routes-models/ResponseShowsLink.js';
 import ResponseLinksList from '../../../routes-models/ResponseLinksList.js';
 import PaginationQuery from '../../../routes-models/RequestPaginationQuery.js';
 
-import * as classicLinks from '../../../services/classicLinks.js';
-import Joi from 'joi';
+import * as showsLinks from '../../../services/showsLinks.js';
 
-const path = '/{userId}/links/classic';
+const path = '/{userId}/links/shows';
 
 const get = () => ({
     method: 'GET',
     path,
     options: {
-        description: 'Retrieve the classic links for the user',
+        description: 'Retrieve the shows links for the user',
         tags: ['api'],
         validate: {
             params: RequestUserId(),
@@ -22,13 +21,13 @@ const get = () => ({
         },
         response: {
             status: {
-                200: ResponseLinksList(ClassicLink())
+                200: ResponseLinksList(ResponseShowsLink())
             }
         }
     },
     handler: (request, h) => {
 
-        return classicLinks.getListForUser(request.params.userId, {
+        return showsLinks.getListForUser(request.params.userId, {
             page: request.query.page,
             pageSize: request.query['page-size']
         });
@@ -40,33 +39,34 @@ const post = () => ({
     method: 'POST',
     path,
     options: {
-        description: 'Create a classic link for the user',
+        description: 'Create a shows link for the user',
         tags: ['api'],
         validate: {
             params: RequestUserId(),
-            payload: RequestClassicLink()
+            payload: RequestShowsLink()
         },
         response: {
             status: {
-                201: ClassicLink()
+                201: ResponseShowsLink()
             }
         }
     },
     handler: (request, h) => {
 
-        const createdClassicLink = classicLinks.create({
+        const createdShowsLink = showsLinks.create({
             ...request.payload,
             userId: request.params.userId
         });
 
         // Return 201 with the classic link
         return h
-            .response(createdClassicLink)
+            .response(createdShowsLink)
             .code(201);
     },
 });
 
 // TODO: Update and delete
+// TODO: Additional endpoints for managing music platforms
 
 export {
     get,
